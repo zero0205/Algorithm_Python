@@ -5,7 +5,7 @@ str = input()
 result = 0
 
 for i in str:
-    if result * int(i) == 0:
+    if result <= 1 or int(i) <= 1:
         result += int(i)
     else:
         result *= int(i)
