@@ -5,8 +5,6 @@ input_map = []
 for i in range(n):
   input_map.append(list(map(int,input())))
 
-visited = [[False] * m for _ in range(n)]
-
 def dfs(x, y):  # x는 행, y는 열
   # 범위 안에 있는지?
   if x < 0 or x >= n or y < 0 or y >= m:
