@@ -6,7 +6,7 @@ INF = int(1e9)
 graph = [[INF] * (n + 1) for _ in range(n + 1)]
 
 # 자기 자신으로 가는 비용은 0으로 초기화
-for a in range(n):
+for a in range(n + 1):
     graph[a][a] = 0
     
 # 연결된 두 회사의 번호들 입력받기
