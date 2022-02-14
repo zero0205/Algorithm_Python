@@ -16,3 +16,19 @@ for i in arr[1:]:
         
 # 결과값 출력
 print(res)
+
+###### 위의 코드를 좀 더 간결하게 줄이면 ######
+# 문자열 입력받기
+# arr = input()
+
+# res = int(arr[0])
+
+# for i in arr[1:]:
+#     num = int(i)
+#     if res <= 1 or num <= 1:
+#         res += num
+#     else:
+#         res *= num
+        
+# # 결과값 출력
+# print(res)
