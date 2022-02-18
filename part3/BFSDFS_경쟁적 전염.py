@@ -15,7 +15,7 @@ def virus_spread(graph, heap, n):
     dir = [(-1,0),(1,0),(0,-1),(0,1)]   # 상하좌우
     new_h = []
     while heap:
-        v, r,c = heapq.heappop(heap)
+        v, r, c = heapq.heappop(heap)
         for d in dir:
             nr = r + d[0]
             nc = c + d[1]

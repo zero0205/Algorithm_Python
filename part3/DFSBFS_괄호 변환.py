@@ -47,8 +47,7 @@ def dfs(p):
         v = p[cnt_l + cnt_r:]
         # u가 올바른 문자열이면
         if check_right(u):
-            new_p = dfs(v)
-            return u + new_p
+            return u + dfs(v)
         else:
             new_p = '(' + dfs(v) + ')'
             return new_p + trim_reverse(u)
