@@ -1,5 +1,4 @@
 from itertools import combinations
-from unittest import result
 
 # n : 볼링공 개수, m : 볼링공 최대 무게
 n, m = map(int,input().split())
