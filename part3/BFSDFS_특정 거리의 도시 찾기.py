@@ -43,7 +43,7 @@ def bfs(graph, start, visited):
         for i in graph[v]:
             if not visited[i]:
                 que.append(i)
-                distance[i] = min(distance[i], distance[v] + 1)
+                distance[i] = distance[v] + 1
                 visited[i] = True
 
 bfs(graph, x, visited)        
