@@ -1,5 +1,3 @@
-import heapq
-
 def solution(N, stages):
     answer = []
     # (스테이지 도달했지만 클리어 못한 사람 수, 스테이지 도달 플레이어 수)

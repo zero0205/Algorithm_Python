@@ -13,6 +13,7 @@ dir_order = [[] for _ in range(m + 1)]
 for i in  range(1, m + 1):
     for _ in range(4):  # 각 상어별 우선순위 (위, 아래, 왼, 오 순서)
         dir_order[i].append(list(map(int, input().split())))
+        
 
 # 위 아래 왼 오(1,2,3,4)
 dx = [-1, 1, 0, 0]
