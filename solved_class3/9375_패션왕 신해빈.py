@@ -18,4 +18,3 @@ for _ in range(t):
             dict[kind] = lst
         else:
             dict[kind] = [name]
-    
