@@ -16,7 +16,7 @@ def bfs(graph):
         for node in graph[nx]:
             if not visited[node]:
                 result += 1
-                q.append(nx)  
+                q.append(node)  
                 visited[node] = True
     return result
 
