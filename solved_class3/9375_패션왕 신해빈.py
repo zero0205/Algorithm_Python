@@ -11,10 +11,14 @@ for _ in range(t):
     dict = {}
     # 의상 이름, 종류 입력받기
     for _ in range(n):
-        name, kind = input().split()
-        if kind in dict:
-            lst = dict[kind]
-            lst.append(name)
-            dict[kind] = lst
+        name, ty = input().split()
+        if ty in dict:
+            dict[ty] += 1
         else:
-            dict[kind] = [name]
+            dict[ty] = 1
+            
+    ans = 1
+    for num in dict.values():
+        ans *= (num + 1)
+        
+    print(ans - 1)
