@@ -1,6 +1,5 @@
 # https://www.acmicpc.net/problem/9375
 
-from itertools import combinations
 import sys
 
 input = sys.stdin.readline
