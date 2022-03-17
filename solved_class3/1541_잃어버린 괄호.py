@@ -39,3 +39,16 @@ while q:
         prev = 0
         
 print(res)        
+
+######### split 이용 ##########
+# # 식 입력받기
+# arr = input().rstrip().split("-")    # -를 기준으로 split
+
+# num_arr = []
+# for a in arr:
+#     num_arr.append(sum(map(int, a.split("+"))))    # +를 기준으로 split
+
+# ans = num_arr[0]
+# for i in range(1, len(num_arr)):
+#     ans -= num_arr[i]
+# print(ans)
