@@ -28,4 +28,5 @@ def solution(sentences, n):
         answer = max(answer, temp)
     return answer
 
-print(solution(["line in line", "LINE", "in lion"],))
+print(solution(["line in line", "LINE", "in lion"],5))
+print(solution(["ABcD", "bdbc", "a", "Line neWs"],7))

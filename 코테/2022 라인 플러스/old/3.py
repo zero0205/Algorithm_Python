@@ -8,16 +8,16 @@ def solution(num_teams, remote_tasks, office_tasks, employees):
         emp_arr = employees[i].split()
         office_yes = False
         for emp_arr_el in emp_arr[1:]:
-            if emp_arr_el in office_tasks:
+            if emp_arr_el in office_tasks:  # 출근하는 사람 있음
                 office[int(emp_arr[0])].append(i + 1)
                 office_yes = True
                 break
-        if not office_yes:
+        if not office_yes:  # 팀 전부 재택
             remote[int(emp_arr[0])].append(i + 1)
     for i in range(1, num_teams + 1):
-        if len(office[i]) == 0:  # 팀원이 전부 재택근무 대상
+        if len(office[i]) == 0:  # 팀원이 전부 재택근무 대상 -> 사원 번호 제일 빠른 사람 빼고 재택
             answer.extend(remote[i][1:])
-        else:
+        else:   # 출근하는 사람 있음 -> 재택근무하는 사람 그냥 뽑으면 됨
             answer.extend(remote[i])
     answer.sort()
     return answer
