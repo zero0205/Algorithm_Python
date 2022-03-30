@@ -16,3 +16,4 @@ def solution(arr, brr):
 
 print(solution([3, 7, 2, 4], [4, 5, 5, 2]))
 print(solution([6, 2, 2, 6], [4, 4, 4, 4]))
+# print(solution([1, 1, 1, 10], [2, 3, 5, 3]))
