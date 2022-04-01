@@ -9,7 +9,6 @@ arr = [list(map(int, input().split())) for _ in range(n)]
 
 shark_size = 2
 eating_fish_num = 0
-fish_location = []
 sec = 0
 
 dx = [-1, 1, 0, 0]
@@ -61,6 +60,8 @@ while True:
     min_dist = INF
     for fish in possible_fish_lst:
         dist = shark_eat(shark_location[0], shark_location[1], fish[0], fish[1])
+        if dist == None:
+            continue
         # 거리가 가장 가까운 물고기 중 가장 먼저 저장되는 값이 가장 위쪽, 왼쪽일것
         if dist < min_dist: 
             eat_r, eat_c = fish
