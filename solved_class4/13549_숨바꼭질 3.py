@@ -15,7 +15,7 @@ while q:
         print(cnt)
         break
     if 0 <= now * 2 <= 100000 and not visited[now * 2]:
-        q.append((now * 2, cnt))
+        q.appendleft((now * 2, cnt))
         visited[now * 2] = True
     for i in [now - 1, now + 1]:
         if 0 <= i <= 100000 and not visited[i]:
