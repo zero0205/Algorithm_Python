@@ -57,3 +57,32 @@
 # print(ans)
 
 ################ DP ####################
+n = int(input())
+home = [list(map(int, input().split())) for _ in range(n)]
+
+# 0: 가로, 1: 세로, 2: 대각선
+dp = [[[0] * n for _ in range(n)] for _ in range(3)] 
+
+# 처음 시작 위치
+dp[0][0][1] = 1 
+
+# dp 배열 초기화
+for i in range(2, n):
+    if home[0][i] == 1: # 첫번째 행은 벽 나오면 오른쪽으로 더이상 갈 방법 X
+        break
+    dp[0][0][i] = 1    # 첫번째 행은 처음 위치에서 오른쪽으로 가는 방법 말고는 없음
+    
+for r in range(1, n):
+    for c in range(2, n):   # 두번째 열까지는 어차피 갈 방법이 X
+        if home[r][c] == 0: # 일단 가려는 칸이 빈칸인지
+            # 현재 파이프가 대각선
+            if home[r-1][c] == 0 and home[r][c-1] == 0:
+                dp[2][r][c] = dp[0][r-1][c-1] + dp[1][r-1][c-1] + dp[2][r-1][c-1]
+            # 현재 파이프가 가로
+            dp[0][r][c] = dp[0][r][c-1] + dp[2][r][c-1]
+            # 현재 파이프가 세로
+            dp[1][r][c] = dp[1][r-1][c] + dp[2][r-1][c]
+sum = 0
+for i in range(3):
+    sum += dp[i][n-1][n-1]
+print(sum)
