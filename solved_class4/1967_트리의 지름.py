@@ -1,7 +1,6 @@
 # https://www.acmicpc.net/problem/1967
 
 # import sys
-# from unittest.util import _MAX_LENGTH
 # input = sys.stdin.readline
 
 # n = int(input())
@@ -14,6 +13,7 @@
 # def dfs(start, l, visited, l_arr):
 #     if not tree[start]:
 #         l_arr.append(l)
+#         return l_arr
 #     else:
 #         for n, c in tree[start]:
 #             visited[n] = True
