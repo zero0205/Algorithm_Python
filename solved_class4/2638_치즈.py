@@ -55,11 +55,39 @@ paper = [list(map(int, input().split())) for _ in range(n)]
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
-q = deque([(0, 0)])
-while q:
-    x, y = q.popleft()
-    for i in range(4):
-        nx = x + dx[i]
-        ny = y + dy[i]
-        if paper[nx][ny] == 1:  # 치즈임
-            
+def bfs(): 
+    q = deque([(0, 0)])
+    visited = [[False] * m for _ in range(n)]
+    visited[0][0] = True    # 외부 공기
+
+    # 외부 공기 판단
+    while q:
+        x, y = q.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0 <= nx < n and 0 <= ny < m: # 범위 안 벗어남
+                if paper[nx][ny] == 0 and not visited[nx][ny]:  # 외부 공기
+                    q.append((nx, ny))
+                    visited[nx][ny] = True
+                else:   # 치즈면 +1 해주고 감 (외부 공기와 맞닿은 면이 있을 때마다 1 증가)
+                    if not visited[nx][ny]:
+                        paper[nx][ny] += 1
+ans = 0
+while True:
+    bfs()
+    melt = False
+    
+    for r in range(n):
+        for c in range(m):
+            if paper[r][c] >= 3:    # 외부 공기와 2면 이상 맞닿은 치즈 = 이번에 녹음
+                paper[r][c] = 0
+                melt = True
+            elif paper[r][c] == 2:
+                paper[r][c] = 1
+    if melt:
+        ans += 1
+    else:
+        break
+    
+print(ans)
