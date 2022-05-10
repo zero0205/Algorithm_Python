@@ -1,78 +1,41 @@
-# from collections import deque
+import heapq
 
-# def get_distance(r, c, keyboard, target):
-#     q = deque([(r, c, 0, 0)])
-#     visited = [[False] * 10 for _ in range(2)]
-#     visited[r][c] = True
-
-#     dx = [-1, 1, 0, 0]
-#     dy = [0, 0, -1, 1]
-
-#     while q:
-#         x, y, r_dist, c_dist = q.popleft()
-#         if keyboard[x][y] == target:
-#             return [r_dist, c_dist]
-#         for i in range(4):
-#             nx = x + dx[i]
-#             ny = y + dy[i]
-#             if nx < 0 or nx > 1 or ny < 0 or ny > 9: # 범위를 벗어남
-#                 continue
-#             if not visited[nx][ny]:
-#                 if i < 2:   # 수직 이동한 경우
-#                     q.append((nx, ny, r_dist + 1, c_dist))
-#                 else:   # 수평 이동한 경우
-#                     q.append((nx, ny, r_dist, c_dist + 1))
-#                 visited[nx][ny] = True
-
-def get_coordinate(c):
-    keyboard = {
-        "1":(0, 0), "2":(0, 1), "3":(0, 2), "4":(0, 3), 
-        "5":(0, 4), "6":(0, 5), "7":(0, 6), "8":(0, 7), 
-        "9":(0, 8), "0":(0, 9), "Q":(1, 0), "W":(1, 1), 
-        "E":(1, 2), "R":(1, 3), "T":(1, 4), "Y":(1, 5), 
-        "U":(1, 6), "I":(1, 7), "O":(1, 8), "P":(1, 9)}
-    return keyboard[c]
-
-def solution(line):
+def solution(rooms, target):
     answer = []
-    # 손가락 초기 위치
-    left = (1, 0)
-    right = (1, 9)
-    for c in line:
-        coor = get_coordinate(c)
-        left_dist = abs(left[0] - coor[0]) + abs(left[1] - coor[1])
-        right_dist = abs(right[0] - coor[0]) + abs(right[1] - coor[1])
-        # 두 거리가 같은 경우
-        if left_dist == right_dist:
-            # 왼쪽 수평 거리가 더 가까운 경우
-            if abs(left[1] - coor[1]) < abs(right[1] - coor[1]):
-                left = coor
-                answer.append(0)
-            elif abs(left[1] - coor[1]) > abs(right[1] - coor[1]):
-                right = coor
-                answer.append(1)
-            else:   # 수평거리마저 같은 경우
-                # 해당 키가 키보드 상의 왼쪽
-                if coor[1] < 5:
-                    left = coor
-                    answer.append(0)
-                else:
-                    right = coor
-                    answer.append(1)
-        # 두 거리가 같지 않은 경우(왼손)
-        elif left_dist < right_dist:
-            left = coor
-            answer.append(0)
-        # 두 거리가 같지 않은 경우(오른)
-        else:
-            right = coor
-            answer.append(1)
+    personal_sit = {}
+    for room in rooms:
+        idx = room.find(']')
+        room_num = int(room[1:idx])
+        people = room[idx + 1:].split(',')
+        # 사람별 자리 파악
+        for p in people:
+            if personal_sit.get(p):
+                personal_sit[p].append(room_num)
+            else:
+                personal_sit[p] = [room_num]
+    # 개수 세기용 힙
+    q = []
+    for person in personal_sit.keys():
+        min_dist = int(1e9)
+        # 이미 배정하려는 방에 자리가 있는 사람이면 제외
+        if target in personal_sit[person]:
+            continue
+        # 지금 배정하려는 방으로부터 가장 가까운 방의 거리 구하기
+        for r in personal_sit[person]:
+            min_dist = min(min_dist, abs(r - target))
+        # (배정되어 있는 자릿수, 배정할 방으로부터의 최소거리, 이름)을 최소 힙에 넣음
+        heapq.heappush(q, (len(personal_sit[person]), min_dist, person))
+    
+    # 최소 힙에서 하나씩 pop
+    while q:
+        lst = heapq.heappop(q)
+        answer.append(lst[2])
     return answer
 
-# 테스트 케이스
-print(solution("Q4OYPI"))
-# [0,0,1,0,1,1]
-print(solution("RYI76"))
-# [0,0,1,1,0]
-print(solution("64E2"))
-# [1,1,1,0]
+# 테스트 케이스 (받을 수 있는 후보 우선순위대로 출력)
+print(solution(["[403]James", "[404]Azad,Louis,Andy", "[101]Azad,Guard"], 403))
+#["Andy", "Louis", "Guard", "Azad"]
+print(solution(["[101]Azad,Guard", "[202]Guard", "[303]Guard,Dzaz"], 202))
+#["Azad", "Dzaz"]
+print(solution(["[1234]None,Of,People,Here","[5678]Wow"], 1234))
+#["Wow"]
