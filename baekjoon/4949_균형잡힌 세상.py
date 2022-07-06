@@ -1,30 +1,30 @@
 # https://www.acmicpc.net/problem/4949
 
-from collections import deque
-
-def is_balance():
+while True:
     q = []
-    for c in input():
-        if c == '.':
-            print("yes")
-            break
-        if c == '[':
-            q.append('[')
+    s = input()
+    
+    if s == '.':
+        break
+    
+    for c in s:
+        if c == '[' or c == '(':
+            q.append(c)
         elif c == ']':
-            if not q or q.pop() != '[':
-                print("no")
+            if q and q[-1] == '[':
+                q.pop()
+            else:
+                q.append(c)
                 break
-        elif c == '(':
-            q.append('(')
         elif c == ')':
-            if not q or q.pop() != '(':
-                print("no")
+            if q and q[-1] == '(':
+                q.pop()
+            else:
+                q.append(c)
                 break
         else:
             continue
-        
-while True:
-    try:
-        is_balance()
-    except EOFError:
-        break
+    if q:   # 스택에 남은 괄호들이 있다면 짝이 안 맞는거
+        print("no")
+    else:
+        print("yes")
