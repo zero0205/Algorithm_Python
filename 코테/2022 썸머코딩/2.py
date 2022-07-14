@@ -14,39 +14,22 @@ def solution(rooms, target):
             else:
                 personal_sit[p] = [room_num]
     # 개수 세기용 힙
-    sit_num = []
+    q = []
     for person in personal_sit.keys():
-        # 사람별로 현재 방까지의 최소 거리 구하기
-        for r in personal_sit[person]:
-            
-        heapq.heappush(sit_num, (len(personal_sit[person]), person))
-
-    candidate = ("", 10000000)
-    candidate_lst = []
-    
-    while sit_num:
-        now = heapq.heappop(sit_num)
-        if candidate[0] < now[0]: # 지정 자리가 더 많은 경우 반복문 종료
-            heapq.heappush(sit_num, now)
-            break
-        # 해당 방에 이미 자리가 있어도 후보 제외
-        if now[1] in room_dict[target]:
-            candidate_lst.append(now)
+        min_dist = int(1e9)
+        # 이미 배정하려는 방에 자리가 있는 사람이면 제외
+        if target in personal_sit[person]:
             continue
-        now_min = 100000
-        for r in personal_sit[now[1]]:
-            now_min = min(now_min, abs(r - target))
-        # 가장 가까운 방 거리, 이름 힙큐에 저장
-        heapq.heappush(candidate_lst, (now_min, now[1])
-
-    # 받기로 정해진 사람 방 줌
-    room_dict[target].append(candidate[1])
-    personal_sit[candidate[1]]. append(target)
-    answer.append(candidate[1])
-    # 탈락자와 자리 받은 자들 다시 힙에 넣어줌
-    candidate_lst.append(candidate)
-    for c in candidate_lst:
-        heapq.heappush(sit_num, c)
+        # 지금 배정하려는 방으로부터 가장 가까운 방의 거리 구하기
+        for r in personal_sit[person]:
+            min_dist = min(min_dist, abs(r - target))
+        # (배정되어 있는 자릿수, 배정할 방으로부터의 최소거리, 이름)을 최소 힙에 넣음
+        heapq.heappush(q, (len(personal_sit[person]), min_dist, person))
+    
+    # 최소 힙에서 하나씩 pop
+    while q:
+        lst = heapq.heappop(q)
+        answer.append(lst[2])
     return answer
 
 # 테스트 케이스 (받을 수 있는 후보 우선순위대로 출력)
