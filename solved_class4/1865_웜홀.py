@@ -1,46 +1,37 @@
 import sys
 input = sys.stdin.readline
 
-INF = int(1e9)
+# 벨만 포드 알고리즘
+# 최단 거리 테이블이 갱신된다면 음수 간선 사이클이 있는 것
+def bf(start):
+    dist[start] = 0
+    for i in range(1, n + 1):
+        for j in range(1, n + 1):   
+            for nx, t in road[j]:   # 벨만포드는 모든 간선 다 확인
+                if dist[nx] > dist[j] + t:   # 지금 노드를 통해 가는게 더 시간이 단축된다면
+                    dist[nx] = dist[j] + t
+                    if i == n:  # n번 했는데도 갱신되면 음의 사이클 존재
+                        return True
 
 tc = int(input())   # 테스트케이스의 개수
+
 for i in range(tc):
     n, m, w = map(int, input().split())
     
-    road = [[INF for _ in range(n + 1)] for _ in range(n + 1)]
-    # 자기 자신으로 가는 건 0으로 초기화
-    for i in range(n + 1):
-        road[i][i] = 0
-    
+    road = [[] for _ in range(n + 1)]
+    dist = [10001 for _ in range(n + 1)]
+  
     # 도로의 정보 입력
     for _ in range(m): 
         s, e, t = map(int, input().split())
-        road[s][e] = t
-        road[e][s] = t
+        road[s].append((e,t))
+        road[e].append((s,t))
     # 웜홀의 정보 입력
     for _ in range(w):
         s, e, t = map(int, input().split())
-        road[s][e] = -t
+        road[s].append((e,-t))       
 
-    flag = False                
-
-    # 플로이드 와샬
-    for k in range(1, n + 1):
-        if flag:
-            break
-        for i in range(1, n + 1):
-            if flag:
-                break
-            for j in range(1, n + 1):
-                road[i][j] = min(road[i][j], road[i][k] + road[k][j])
-                if i == j and road[i][j] < 0:
-                    flag = True
-                    break
-    for j in range(1, n + 1):
-        if road[j][j] < 0:
-            flag = True
-            break
-    if flag:
+    if bf(1):
         print("YES")
     else:
         print("NO")
