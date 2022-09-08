@@ -1,10 +1,10 @@
-# recent ì¡°ê±´ ë§Œì¡± ëª»í•˜ëŠ” ì•± ë¦¬ìŠ¤íŠ¸ ë¦¬í„´
+# recent ì¡°ê±´ ë§Œì¡± ëª»í•˜?Š” ?•± ë¦¬ìŠ¤?Š¸ ë¦¬í„´
 def recent_remove(n, recent, recently_use, records):
-    # në²ˆ ì•±ì˜ ìµœê·¼ recentì¼ ë™ì•ˆ ì´ìš©ì‹œê°„
+    # në²? ?•±?˜ ìµœê·¼ recent?¼ ?™?•ˆ ?´?š©?‹œê°?
     arr = [0] * (n + 1)
     res = []
     for r in records:
-        # ìµœê·¼ recentì¼ ì´ë‚´ì— ì´ìš©ëë‹¤ë©´ ì¶”ê°€
+        # ìµœê·¼ recent?¼ ?´?‚´?— ?´?š©??‹¤ë©? ì¶”ê??
         if r[0] <= recent:
             arr[r[1]] += r[2]
 
@@ -13,9 +13,9 @@ def recent_remove(n, recent, recently_use, records):
             res.append(i)
     return res
 
-# total ì‚­ì œ
+# total ?‚­? œ
 def total_remove(n, total_use, records):
-    # në²ˆ ì•±ì˜ total ì´ìš©ì‹œê°„
+    # në²? ?•±?˜ total ?´?š©?‹œê°?
     arr = [0] * (n + 1)
     res = []
     for r in records:
