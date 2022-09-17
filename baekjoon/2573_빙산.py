@@ -30,10 +30,10 @@ def bfs(x, y):
             elif map_data[nx][ny] > 0 and not visited[nx][ny]:  # 아직 탐색 안한 붙어있는 빙산
                 q.append((nx, ny))
                 visited[nx][ny] = True
-        if cnt > 0:
-            sea.append((x, y, cnt))
+        if cnt > 0: # 바다와 닿은 부분이 있음
+            sea.append((x, y, cnt)) 
     for x, y, cnt in sea:
-        map_data[x][y] -= cnt
+        map_data[x][y] -= cnt   # 바다와 닿은 면적만큼 녹음
         if map_data[x][y] < 0:
             map_data[x][y] = 0
 
@@ -45,17 +45,16 @@ while ice:
     delList = []
     
     for x, y in ice:
-        if map_data[x][y] and not visited[x][y]:
+        if not visited[x][y]:   # 아직 방문하지 않은 빙산이라면 BFS
             bfs(x, y)
             tmp += 1
         if map_data[x][y] == 0:
-            delList.append((x, y))
+            delList.append((x, y))  # 다 녹은 빙산 delList에 추가
             
-    if tmp > 1:
+    if tmp > 1: # 빙산이 2 덩어리 이상으로 쪼개짐
         print(year)
-        break
+        exit()
     ice = sorted(list(set(ice) - set(delList)))
     year += 1
     
-if tmp < 2:
-    print(0)
+print(0)
