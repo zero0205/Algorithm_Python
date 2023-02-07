@@ -12,6 +12,7 @@
 #         ans += int(n[i]) * (b ** (l-i-1))
 # print(ans)
 
+##########################################
 n, b = input().split()  # b진법 수 n
 b = int(b)
 
@@ -25,3 +26,9 @@ for i in range(len(n)):
     else:
         ans += int(n[i]) * (b ** i)
 print(ans)
+
+########### 파이썬 int 함수 ############
+# n, b = input().split()  # b진법 수 n
+# b = int(b)
+
+# print(int(n, b))
