@@ -2,7 +2,7 @@ n, k = map(int, input().split())
 arr = list(map(int, input().split()))
 
 # 행 : arr 인덱스
-# 열 : 원소 삭제 횟수
+# 열 : 원소 삭제 최대 횟수 (k번 이하)
 dp = [[0 for _ in range(k+1)] for _ in range(n+1)]
 for i in range(1, n + 1):
     for j in range(k + 1):
