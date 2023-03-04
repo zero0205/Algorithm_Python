@@ -1,8 +1,15 @@
 import sys
 input = sys.stdin.readline
+<<<<<<< HEAD
 
 n, magic, k = map(int, input().split())
 fireball = []
+=======
+from collections import deque
+
+n, magic, k = map(int, input().split())
+fireball = deque()
+>>>>>>> b5672a5f1244820745b9b9b19892bf587f90d62b
 for _ in range(magic):
     # r, c, m, s, d (행 열 질량 속력 방향)
     r, c, m, s, d = map(int, input().split())
