@@ -6,3 +6,5 @@ print_map.*
 ./.vscode
 
 launch.json
+
+/.vscode
